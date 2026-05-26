@@ -133,27 +133,7 @@ public abstract class BitmapPalette {
         if (palette == null) return;
 
         for (PaletteTarget target : targets) {
-            Palette.Swatch swatch = null;
-            switch (target.paletteProfile) {
-                case Profile.VIBRANT:
-                    swatch = palette.getVibrantSwatch();
-                    break;
-                case Profile.VIBRANT_DARK:
-                    swatch = palette.getDarkVibrantSwatch();
-                    break;
-                case Profile.VIBRANT_LIGHT:
-                    swatch = palette.getLightVibrantSwatch();
-                    break;
-                case Profile.MUTED:
-                    swatch = palette.getMutedSwatch();
-                    break;
-                case Profile.MUTED_DARK:
-                    swatch = palette.getDarkMutedSwatch();
-                    break;
-                case Profile.MUTED_LIGHT:
-                    swatch = palette.getLightMutedSwatch();
-                    break;
-            }
+            Palette.Swatch swatch = getSwatchForProfile(palette, target.paletteProfile);
 
             if (swatch == null) {
                 swatch = new Palette.Swatch(Color.BLACK, 1);
@@ -178,6 +158,25 @@ public abstract class BitmapPalette {
             this.callbacks = null;
         }
     }
+
+    private Palette.Swatch getSwatchForProfile(Palette palette, int profile) {
+    switch (profile) {
+        case Profile.VIBRANT:
+            return palette.getVibrantSwatch();
+        case Profile.VIBRANT_DARK:
+            return palette.getDarkVibrantSwatch();
+        case Profile.VIBRANT_LIGHT:
+            return palette.getLightVibrantSwatch();
+        case Profile.MUTED:
+            return palette.getMutedSwatch();
+        case Profile.MUTED_DARK:
+            return palette.getDarkMutedSwatch();
+        case Profile.MUTED_LIGHT:
+            return palette.getLightMutedSwatch();
+        default:
+            return null;
+    }
+}
 
     private void crossfadeTargetBackground(PaletteTarget target, Pair<View, Integer> t, int newColor) {
 

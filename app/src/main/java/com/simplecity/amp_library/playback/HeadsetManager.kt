@@ -26,16 +26,10 @@ class HeadsetManager(
                     return
                 }
 
-                if (intent.hasExtra("state")) {
-                    if (intent.getIntExtra("state", 0) == 0) {
-                        if (playbackSettingsManager.pauseOnHeadsetDisconnect) {
-                            playbackManager.pause(false)
-                        }
-                    } else if (intent.getIntExtra("state", 0) == 1) {
-                        if (playbackSettingsManager.playOnHeadsetConnect) {
-                            playbackManager.play()
-                        }
-                    }
+                if (intent.getIntExtra("state", -1) == 0 && playbackSettingsManager.pauseOnHeadsetDisconnect) {
+                    playbackManager.pause(false)
+                } else if (intent.getIntExtra("state", -1) == 1 && playbackSettingsManager.playOnHeadsetConnect) {
+                    playbackManager.play()
                 }
             }
         }

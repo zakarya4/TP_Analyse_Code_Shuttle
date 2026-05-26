@@ -47,10 +47,10 @@ public class PlayCountTable extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 2) {
 
-            String TABLE_BACKUP = "BACKUP";
+            String tableBackup = "BACKUP";
 
             //Rename existing table to backup
-            db.execSQL("ALTER TABLE " + TABLE_PLAY_COUNT + " RENAME TO " + TABLE_BACKUP + ";");
+            db.execSQL("ALTER TABLE " + TABLE_PLAY_COUNT + " RENAME TO " + tableBackup + ";");
 
             //Create new table
             db.execSQL("CREATE TABLE " + TABLE_PLAY_COUNT + "("
@@ -60,10 +60,10 @@ public class PlayCountTable extends SQLiteOpenHelper {
 
             //Copy backup into new
             db.execSQL("INSERT OR REPLACE INTO " + TABLE_PLAY_COUNT + "(" + COLUMN_ID + ", " + COLUMN_PLAY_COUNT + ") "
-                    + "SELECT " + COLUMN_ID + "," + COLUMN_PLAY_COUNT + " FROM " + TABLE_BACKUP + "; ");
+                    + "SELECT " + COLUMN_ID + "," + COLUMN_PLAY_COUNT + " FROM " + tableBackup + "; ");
 
             //Drop backup
-            db.execSQL("DROP TABLE " + TABLE_BACKUP + "; ");
+            db.execSQL("DROP TABLE " + tableBackup + "; ");
 
             //We have to end this transaction so we can attach the count info table below
             db.setTransactionSuccessful();
@@ -75,7 +75,7 @@ public class PlayCountTable extends SQLiteOpenHelper {
                 String PATH_COUNT_INFO = applicationContext.getDatabasePath(COUNT_INFO_DATABASE).toString();
                 String TABLE_COUNT_INFO = "COUNT_INFO";
                 String COUNT_INFO_COLUMN_ID = "_id";
-                String COUNT_INFO_COLUMN_TIME_PLAYED = "time_played";
+                String COUNT_INFO_COLUMN_TIME_PLAYED = COLUMN_TIME_PLAYED;
 
                 db.execSQL("ATTACH '" + PATH_COUNT_INFO + "' AS " + TABLE_COUNT_INFO + "; ");
 

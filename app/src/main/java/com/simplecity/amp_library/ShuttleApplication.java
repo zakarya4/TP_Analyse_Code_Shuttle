@@ -79,7 +79,7 @@ public class ShuttleApplication extends DaggerApplication {
     public HashMap<String, UserSelectedArtwork> getUserSelectedArtwork() {
     return userSelectedArtwork;
     }
-    
+
     private static Logger jaudioTaggerLogger1 = Logger.getLogger("org.jaudiotagger.audio");
     private static Logger jaudioTaggerLogger2 = Logger.getLogger("org.jaudiotagger");
 
@@ -106,12 +106,8 @@ public class ShuttleApplication extends DaggerApplication {
             return;
         }
 
-        // Todo: Remove for production builds. Useful for tracking down crashes in beta.
+        // Useful for tracking down crashes in beta.
         RxDogTag.install();
-
-        if (BuildConfig.DEBUG) {
-            // enableStrictMode();
-        }
 
         refWatcher = LeakCanary.install(this);
         // workaround to fix InputMethodManager leak as suggested by LeakCanary lib
@@ -222,7 +218,7 @@ public class ShuttleApplication extends DaggerApplication {
         try {
             return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException | NullPointerException ignored) {
-
+            // Version information is unavailable, fallback value is returned below.
         }
         return "unknown";
     }
