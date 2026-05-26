@@ -243,11 +243,7 @@ public class TaggerDialog extends DialogFragment {
             genre = tag.getFirst(FieldKey.GENRE);
             year = tag.getFirst(FieldKey.YEAR);
             track = tag.getFirst(FieldKey.TRACK);
-            try {
-                trackTotal = tag.getFirst(FieldKey.TRACK_TOTAL);
-            } catch (UnsupportedOperationException ignored) {
-
-            }
+            trackTotal = getFirstTagValue(tag, FieldKey.TRACK_TOTAL);
             try {
                 disc = tag.getFirst(FieldKey.DISC_NO);
             } catch (UnsupportedOperationException ignored) {

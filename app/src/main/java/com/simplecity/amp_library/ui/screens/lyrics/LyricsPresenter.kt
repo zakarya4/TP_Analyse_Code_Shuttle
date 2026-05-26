@@ -109,11 +109,17 @@ constructor(
                             }
                         }
                     } catch (ignored: CannotReadException) {
+                        // Lyrics cannot be read from this file.
                     } catch (ignored: IOException) {
+                        // Lyrics cannot be read from this file.
                     } catch (ignored: TagException) {
+                        // Lyrics cannot be read from this file.
                     } catch (ignored: ReadOnlyFileException) {
+                        // Lyrics cannot be read from this file.
                     } catch (ignored: InvalidAudioFrameException) {
+                        // Lyrics cannot be read from this file.
                     } catch (ignored: UnsupportedOperationException) {
+                        // Lyrics cannot be read from this file.
                     }
                 }
                 lyrics
