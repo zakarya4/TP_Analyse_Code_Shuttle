@@ -71,13 +71,13 @@ public class PlayCountTable extends SQLiteOpenHelper {
 
             //Add rows from count info table
             try {
-                String COUNT_INFO_DATABASE = "count_info.db";
-                String PATH_COUNT_INFO = applicationContext.getDatabasePath(COUNT_INFO_DATABASE).toString();
-                String TABLE_COUNT_INFO = "COUNT_INFO";
-                String COUNT_INFO_COLUMN_ID = "_id";
-                String COUNT_INFO_COLUMN_TIME_PLAYED = COLUMN_TIME_PLAYED;
+                String countInfoDatabase = "count_info.db";
+                String pathCountInfo = applicationContext.getDatabasePath(countInfoDatabase).toString();
+                String tableCountInfo = "COUNT_INFO";
+                String countInfoColumnId = "_id";
+                String countInfoColumnTimePlayed = COLUMN_TIME_PLAYED;
 
-                db.execSQL("ATTACH '" + PATH_COUNT_INFO + "' AS " + TABLE_COUNT_INFO + "; ");
+                db.execSQL("ATTACH '" + pathCountInfo + "' AS " + tableCountInfo + "; ");
 
                 //Now we have to begin a new transaction
                 db.beginTransaction();
@@ -91,7 +91,7 @@ public class PlayCountTable extends SQLiteOpenHelper {
                         + COLUMN_TIME_PLAYED
                         + ") "
                         + "SELECT "
-                        + COUNT_INFO_COLUMN_ID
+                        + countInfoColumnId
                         + ","
                         + "(SELECT "
                         + COLUMN_PLAY_COUNT
@@ -101,9 +101,9 @@ public class PlayCountTable extends SQLiteOpenHelper {
                         + COLUMN_ID
                         + ")"
                         + ","
-                        + COUNT_INFO_COLUMN_TIME_PLAYED
+                        + countInfoColumnTimePlayed
                         + " FROM "
-                        + TABLE_COUNT_INFO
+                        + tableCountInfo
                         + ";");
             } catch (SQLiteException ignored) {
                 // The count info table probably doesn't exist (it wasn't created in the previous version of the app)

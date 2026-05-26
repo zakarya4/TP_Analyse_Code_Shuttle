@@ -60,12 +60,12 @@ class ShareDialog : DialogFragment() {
                                             sendIntent.type = "image/jpeg"
                                         }
                                     } catch (ignored: FileNotFoundException) {
-
+                                        // Image sharing is skipped when the temporary file cannot be created.
                                     } finally {
                                         try {
                                             fileOutputStream?.close()
                                         } catch (ignored: IOException) {
-
+                                            // Ignore close failure.
                                         }
                                     }
 
