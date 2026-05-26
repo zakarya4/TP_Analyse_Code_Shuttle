@@ -239,11 +239,7 @@ public class TaggerDialog extends DialogFragment {
             title = tag.getFirst(FieldKey.TITLE);
             albumName = tag.getFirst(FieldKey.ALBUM);
             artistName = tag.getFirst(FieldKey.ARTIST);
-            try {
-                albumArtistName = tag.getFirst(FieldKey.ALBUM_ARTIST);
-            } catch (UnsupportedOperationException ignored) {
-
-            }
+            albumArtistName = getFirstTagValue(tag, FieldKey.ALBUM_ARTIST);
             genre = tag.getFirst(FieldKey.GENRE);
             year = tag.getFirst(FieldKey.YEAR);
             track = tag.getFirst(FieldKey.TRACK);
@@ -311,6 +307,14 @@ public class TaggerDialog extends DialogFragment {
 
         commentEditText.setText(comment);
         commentEditText.setSelection(commentEditText.getText().length());
+    }
+
+    private String getFirstTagValue(Tag tag, FieldKey fieldKey) {
+        try {
+            return tag.getFirst(fieldKey);
+        } catch (UnsupportedOperationException ignored) {
+            return "";
+        }
     }
 
     private void saveTags() {
